@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "db2-mcp-server"
+version = "0.1.0"
+description = "A read-only MCP server for interacting with a DB2 database."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { file="LICENSE" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License", # Or your chosen license
+    "Operating System :: OS Independent",
+    "Framework :: FastMCP",
+]
+dependencies = [
+    "fastmcp>=2.2.6", # Use latest stable FastMCP 
+    "ibm_db",               # IBM DB2 Python driver
+    "pydantic",             # For data validation
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",        # Testing framework
+    "pytest-cov",           # Code coverage
+    "uv>=0.6.0,<0.7.0",      # Use uv for environment management
+]
+
+[project.urls]
+"Homepage" = "https://github.com/huangjien/db2-mcp-server" # Add repository URL if available
+"Bug Tracker" = "https://github.com/huangjien/db2-mcp-server/issues" # Add issue tracker URL if available
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --cov=src --cov-report=term-missing --cov-fail-under=80"
+testpaths = [
+    "tests",
+]
+
+[tool.coverage.run]
+source = ["src/db2_mcp_server"]
+omit = [
+    "src/db2_mcp_server/__main__.py", # Example: Exclude main entry point if not testable
+]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+
+[dependency-groups]
+dev = [
+    "build>=1.2.2.post1",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "twine>=6.1.0",
+]
