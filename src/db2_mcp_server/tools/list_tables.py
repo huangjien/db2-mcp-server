@@ -25,8 +25,11 @@ class ListTablesResult(BaseModel):
 
 mcp = FastMCP("DB2 MCP Server")
 
-@mcp.tool(name="list_tables")
-def list_tables(ctx, args: ListTablesInput) -> ListTablesResult:
+def _list_tables_impl(ctx, args: ListTablesInput) -> ListTablesResult:
+    """Internal implementation of list_tables for testing."""
+    return list_tables_logic(args)
+
+def list_tables_logic(args: ListTablesInput) -> ListTablesResult:
     """Lists tables in the configured DB2 database, optionally filtering by schema.
 
     Connects to the DB2 database using read-only credentials and queries
@@ -91,3 +94,12 @@ def list_tables(ctx, args: ListTablesInput) -> ListTablesResult:
             ibm_db.free_stmt(stmt)
         if conn:
             ibm_db.close(conn)
+
+@mcp.tool(name="list_tables")
+def list_tables(ctx, args: ListTablesInput) -> ListTablesResult:
+    """Lists tables in the configured DB2 database, optionally filtering by schema.
+
+    Connects to the DB2 database using read-only credentials and queries
+    SYSCAT.TABLES to retrieve a list of tables.
+    """
+    return list_tables_logic(args)
