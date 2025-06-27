@@ -1,4 +1,4 @@
-# /Users/huangjien/workspace/devops-mcps/tests/test_logger.py
+# /Users/huangjien/workspace/db2-mcp-server/tests/test_logger.py
 import logging
 import os
 from unittest import mock

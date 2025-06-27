@@ -165,7 +165,7 @@ def test_package_version_found(mock_version):
     importlib.reload(sys.modules['db2_mcp_server.core'])
     
     # Assert
-    mock_version.assert_called_with("devops-mcps")
+    mock_version.assert_called_with("db2-mcp-server")
 
 def test_package_version_handling():
     """Test that package version is handled properly."""

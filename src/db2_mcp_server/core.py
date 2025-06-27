@@ -22,10 +22,10 @@ load_dotenv()  # Load .env file
 
 # --- Get Package Version ---
 try:
-  # Replace 'devops-mcps' if your actual distributable package name is different
+  # Replace 'db2-mcp-server' if your actual distributable package name is different
   # This name usually comes from your pyproject.toml `[project] name`
   # or setup.py `name=` argument.
-  package_version = version("devops-mcps")
+  package_version = version("db2-mcp-server")
 except PackageNotFoundError:
   logger.warning(
     "Could not determine package version using importlib.metadata. "

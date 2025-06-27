@@ -1,8 +1,8 @@
 # db2-mcp-server
 
-[![PyPI version](https://badge.fury.io/py/devops-mcps.svg)](https://badge.fury.io/py/devops-mcps)
+[![PyPI version](https://badge.fury.io/py/db2-mcp-server.svg)](https://badge.fury.io/py/db2-mcp-server)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen.svg)](https://github.com/huangjien/devops-mcps)
+[![Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen.svg)](https://github.com/huangjien/db2-mcp-server)
 
 ## Overview
 The `db2-mcp-server` is a Python-based server utilizing the MCP framework to interact with IBM DB2 databases. It provides tools for listing tables and retrieving table metadata.

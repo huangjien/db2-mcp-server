@@ -1,4 +1,4 @@
-# /Users/huangjien/workspace/devops-mcps/src/devops_mcps/logger.py
+# /Users/huangjien/workspace/db2-mcp-server/src/devops_mcps/logger.py
 import logging
 import logging.handlers
 import sys

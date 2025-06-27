@@ -35,8 +35,8 @@ dev = [
 
 
 [project.scripts]
-devops-mcps = "db2_mcp_server.core:main"
-devops-mcps-stream-http = "db2_mcp_server.core:main_stream_http"
+db2-mcp-server = "db2_mcp_server.core:main"
+db2-mcp-server-stream-http = "db2_mcp_server.core:main_stream_http"
 
 [tool.pytest.ini_options]
 minversion = "7.0"
