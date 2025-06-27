@@ -11,7 +11,6 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: MIT License", # Or your chosen license
     "Operating System :: OS Independent",
-    "Framework :: FastMCP",
 ]
 dependencies = [
     "fastmcp>=2.2.6", # Use latest stable FastMCP 
