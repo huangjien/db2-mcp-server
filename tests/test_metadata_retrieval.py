@@ -18,8 +18,6 @@ class TestMetadataRetrievalTool(unittest.TestCase):
             {'COLNAME': 'NAME', 'TYPENAME': 'VARCHAR'}
         ]
         # Mock the ibm_db functions to return expected results
-        mock_conn = mock_ibm_db.connect.return_value
-        mock_stmt = mock_ibm_db.prepare.return_value
         mock_ibm_db.execute.return_value = True
         mock_ibm_db.fetch_assoc.side_effect = expected_result + [None]
 

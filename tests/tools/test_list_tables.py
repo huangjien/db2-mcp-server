@@ -33,7 +33,7 @@ def test_list_tables_success_no_filter(mock_ibm_db, mock_tool_context):
     # Simulate fetching two tables
     mock_ibm_db.fetch_tuple.side_effect = [('TABLE1 ',), ('TABLE2 ',), None]
 
-    args = ListTablesInput(schema_filter=None)
+    args = ListTablesInput(schema=None)
 
     # Act
     result = list_tables(mock_tool_context, args)
@@ -59,7 +59,7 @@ def test_list_tables_success_with_filter(mock_ibm_db, mock_tool_context):
     mock_ibm_db.fetch_tuple.side_effect = [('TABLE_A',), None]
 
     schema = "MYSCHEMA"
-    args = ListTablesInput(schema_filter=schema)
+    args = ListTablesInput(schema=schema)
 
     # Act
     result = list_tables(mock_tool_context, args)
@@ -80,7 +80,7 @@ def test_list_tables_connection_error(mock_ibm_db, mock_tool_context):
     # Arrange Mocks
     mock_ibm_db.connect.return_value = None # Simulate connection failure
 
-    args = ListTablesInput(schema_filter=None)
+    args = ListTablesInput(schema=None)
 
     # Act & Assert
     with pytest.raises(ConnectionError, match="Failed to connect to the DB2 database."):
@@ -101,7 +101,7 @@ def test_list_tables_prepare_error(mock_ibm_db, mock_tool_context):
     mock_ibm_db.prepare.return_value = None # Simulate prepare failure
     mock_ibm_db.stmt_errormsg.return_value = "Syntax error"
 
-    args = ListTablesInput(schema_filter=None)
+    args = ListTablesInput(schema=None)
 
     # Act & Assert
     with pytest.raises(RuntimeError, match="Failed to prepare SQL statement: Syntax error"):
@@ -124,7 +124,7 @@ def test_list_tables_execute_error(mock_ibm_db, mock_tool_context):
     mock_ibm_db.execute.return_value = False # Simulate execute failure
     mock_ibm_db.stmt_errormsg.return_value = "Table not found"
 
-    args = ListTablesInput(schema_filter=None)
+    args = ListTablesInput(schema=None)
 
     # Act & Assert
     with pytest.raises(RuntimeError, match="Failed to execute SQL statement: Table not found"):
@@ -147,7 +147,7 @@ def test_list_tables_no_tables_found(mock_ibm_db, mock_tool_context):
     mock_ibm_db.execute.return_value = True
     mock_ibm_db.fetch_tuple.return_value = None # No results
 
-    args = ListTablesInput(schema_filter=None)
+    args = ListTablesInput(schema=None)
 
     # Act
     result = list_tables(mock_tool_context, args)
@@ -162,7 +162,7 @@ def test_list_tables_no_tables_found(mock_ibm_db, mock_tool_context):
     mock_ibm_db.free_stmt.assert_called_once_with(mock_stmt)
 
 @patch('db2_mcp_server.tools.list_tables.ibm_db')
-def test_list_tables_empty_schema_filter(mock_ibm_db, mock_tool_context):
+def test_list_tables_empty_schema(mock_ibm_db, mock_tool_context):
     """Test listing tables with an empty schema filter."""
     # Arrange Mocks
     mock_conn = MagicMock()
@@ -172,7 +172,7 @@ def test_list_tables_empty_schema_filter(mock_ibm_db, mock_tool_context):
     mock_ibm_db.execute.return_value = True
     mock_ibm_db.fetch_tuple.side_effect = [('TABLE1',), ('TABLE2',), None]
 
-    args = ListTablesInput(schema_filter="")
+    args = ListTablesInput(schema="")
 
     # Act
     result = list_tables(mock_tool_context, args)
@@ -187,7 +187,7 @@ def test_list_tables_empty_schema_filter(mock_ibm_db, mock_tool_context):
     mock_ibm_db.free_stmt.assert_called_once_with(mock_stmt)
 
 @patch('db2_mcp_server.tools.list_tables.ibm_db')
-def test_list_tables_null_schema_filter(mock_ibm_db, mock_tool_context):
+def test_list_tables_null_schema(mock_ibm_db, mock_tool_context):
     """Test listing tables with a null schema filter."""
     # Arrange Mocks
     mock_conn = MagicMock()
@@ -197,7 +197,7 @@ def test_list_tables_null_schema_filter(mock_ibm_db, mock_tool_context):
     mock_ibm_db.execute.return_value = True
     mock_ibm_db.fetch_tuple.side_effect = [('TABLE1',), ('TABLE2',), None]
 
-    args = ListTablesInput(schema_filter=None)
+    args = ListTablesInput(schema=None)
 
     # Act
     result = list_tables(mock_tool_context, args)
@@ -221,7 +221,7 @@ def test_list_tables_database_error(mock_ibm_db, mock_tool_context):
     mock_ibm_db.prepare.return_value = mock_stmt
     mock_ibm_db.execute.side_effect = Exception("Database error")
 
-    args = ListTablesInput(schema_filter=None)
+    args = ListTablesInput(schema=None)
 
     # Act & Assert
     with pytest.raises(Exception, match="Database error"):

@@ -1,5 +1,9 @@
 # db2-mcp-server
 
+[![PyPI version](https://badge.fury.io/py/devops-mcps.svg)](https://badge.fury.io/py/devops-mcps)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen.svg)](https://github.com/huangjien/devops-mcps)
+
 ## Overview
 The `db2-mcp-server` is a Python-based server utilizing the MCP framework to interact with IBM DB2 databases. It provides tools for listing tables and retrieving table metadata.
 
@@ -38,10 +42,19 @@ The `db2-mcp-server` is a Python-based server utilizing the MCP framework to int
 
 ## Testing
 - Use `pytest` (version ≥ 7.0.0) for running tests.
-- Ensure code coverage is ≥ 90%.
+- Current test coverage: **97.19%** (exceeding the 80% requirement).
+- Comprehensive test suite includes:
+  - Core functionality tests (`test_core.py`)
+  - Database tools tests (`test_list_tables.py`, `test_metadata_retrieval.py`)
+  - Caching mechanism tests (`test_cache.py`)
+  - Logging configuration tests (`test_logger.py`)
 - Run tests with:
   ```bash
-  pytest --strict-markers --cov
+  pytest --cov=src/db2_mcp_server --cov-report=html tests/
+  ```
+- For verbose output:
+  ```bash
+  pytest --cov=src/db2_mcp_server --cov-report=term-missing -v
   ```
 
 ## Security and API Restrictions

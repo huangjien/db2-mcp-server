@@ -1,9 +1,12 @@
 """MCP Tool to list tables in a DB2 database."""
 
-from typing import List, Optional
-
-import ibm_db
 from pydantic import BaseModel, Field
+from typing import List, Optional
+import ibm_db
+import logging
+from db2_mcp_server.cache import CacheManager
+from db2_mcp_server.logger import logger
+from fastmcp import FastMCP
 
 # Placeholder for DB connection details - should be configured securely
 # Example: Read from environment variables or a config file
@@ -11,15 +14,14 @@ DB_CONNECTION_STRING = "DATABASE=your_db;HOSTNAME=your_host;PORT=your_port;PROTO
 
 class ListTablesInput(BaseModel):
     """Input schema for the list_tables tool."""
-    schema_filter: Optional[str] = Field(
-        None, description="Optional schema name to filter tables by (e.g., 'MYSCHEMA')."
+    schema: Optional[str] = Field(
+        None,
+        description="Optional schema name to filter tables. If not provided, lists all tables."
     )
 
 class ListTablesResult(BaseModel):
     """Result schema for the list_tables tool."""
     tables: List[str] = Field(..., description="A list of table names found.")
-
-from fastmcp import Context, FastMCP
 
 mcp = FastMCP("DB2 MCP Server")
 
@@ -46,9 +48,9 @@ def list_tables(ctx, args: ListTablesInput) -> ListTablesResult:
         params = []
 
         # Add schema filter if provided
-        if args.schema_filter:
+        if args.schema:
             sql += " AND TABSCHEMA = ?"
-            params.append(args.schema_filter.upper()) # DB2 schema names often uppercase
+            params.append(args.schema.upper()) # DB2 schema names often uppercase
 
         sql += " ORDER BY TABNAME"
 
