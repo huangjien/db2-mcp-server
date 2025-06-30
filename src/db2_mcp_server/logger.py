@@ -101,5 +101,6 @@ def setup_logging() -> bool:
 
   return file_logging_enabled
 
+
 # Create a module-level logger that can be imported
 logger = logging.getLogger(__name__)

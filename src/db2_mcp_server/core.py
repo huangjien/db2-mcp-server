@@ -2,45 +2,23 @@ import logging
 import os
 import sys
 import argparse
-import logging
 
 # Third-party imports
 from dotenv import load_dotenv
-from importlib.metadata import version, PackageNotFoundError
 
-# MCP imports
-from mcp.server.fastmcp import FastMCP
 # Local imports
 from .logger import setup_logging
+from .mcp_instance import mcp
 
-# Setup logging before importing github/jenkins
+# Setup logging before importing modules
 setup_logging()
 logger = logging.getLogger(__name__)
 
 # --- Environment Setup ---
 load_dotenv()  # Load .env file
 
-# --- Get Package Version ---
-try:
-  # Replace 'db2-mcp-server' if your actual distributable package name is different
-  # This name usually comes from your pyproject.toml `[project] name`
-  # or setup.py `name=` argument.
-  package_version = version("db2-mcp-server")
-except PackageNotFoundError:
-  logger.warning(
-    "Could not determine package version using importlib.metadata. "
-    "Is the package installed correctly? Falling back to 'unknown'."
-  )
-  package_version = "?.?.?"  # Provide a fallback
+# Import modules after mcp instance is created to avoid circular imports
 
-# --- MCP Server Setup ---
-
-mcp = FastMCP(
-  f"DB2 MCP Server v{package_version} (DB2)",
-  host="0.0.0.0",
-  port=8000,
-  settings={"initialization_timeout": 10, "request_timeout": 300},
-)
 
 def main():
   """Entry point for the CLI."""
