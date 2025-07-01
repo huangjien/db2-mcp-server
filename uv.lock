@@ -228,7 +228,7 @@ wheels = [
 
 [[package]]
 name = "db2-mcp-server"
-version = "0.1.1"
+version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "dotenv" },
