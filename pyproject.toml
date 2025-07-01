@@ -1,6 +1,6 @@
 [project]
 name = "db2-mcp-server"
-version = "0.1.2"
+version = "0.2.0"
 authors = [{ name = "Jien Huang", email = "huangjien@gmail.com" }]
 description = "A read-only MCP server for interacting with a DB2 database."
 readme = "README.md"
