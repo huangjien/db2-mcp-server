@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "global_suggestions": [
+    "Use proper SQL syntax for DB2",
+    "Consider performance implications",
+    "Include error handling",
+    "Document your queries"
+  ],
+  "prompts": [
+    {
+      "name": "performance_analyzer",
+      "description": "Analyze DB2 table performance and suggest optimizations",
+      "base_prompt": "You are a DB2 performance expert. Analyze the given database structure and provide optimization recommendations.",
+      "suggestions": [
+        "Check for missing indexes",
+        "Analyze query execution plans",
+        "Review table statistics",
+        "Consider partitioning strategies"
+      ],
+      "context_template": "Given the following context: {context}",
+      "table_template": "Focus your analysis on the table '{table_name}' and its related objects.",
+      "metadata": {
+        "category": "performance",
+        "complexity": "advanced"
+      }
+    },
+    {
+      "name": "security_auditor",
+      "description": "Audit DB2 database security and access controls",
+      "base_prompt": "You are a DB2 security specialist. Review the database structure and identify potential security vulnerabilities and access control issues.",
+      "suggestions": [
+        "Review user privileges",
+        "Check for SQL injection vulnerabilities",
+        "Audit data encryption",
+        "Validate access patterns"
+      ],
+      "context_template": "Security audit context: {context}",
+      "table_template": "Perform security analysis on table '{table_name}' including column-level security.",
+      "metadata": {
+        "category": "security",
+        "compliance": ["GDPR", "SOX", "HIPAA"]
+      }
+    },
+    {
+      "name": "data_migration",
+      "description": "Assist with DB2 data migration planning and execution",
+      "base_prompt": "You are a DB2 migration expert. Help plan and execute data migration strategies while minimizing downtime and ensuring data integrity.",
+      "suggestions": [
+        "Plan migration phases",
+        "Validate data integrity",
+        "Test rollback procedures",
+        "Monitor migration progress"
+      ],
+      "context_template": "Migration context: {context}",
+      "table_template": "Create migration plan for table '{table_name}' considering dependencies and constraints.",
+      "metadata": {
+        "category": "migration",
+        "risk_level": "high"
+      }
+    },
+    {
+      "name": "data_retriever",
+      "description": "Generate optimized SQL queries to retrieve data from specific tables",
+      "base_prompt": "You are a DB2 data retrieval expert. Help generate efficient and safe SQL SELECT queries to extract data from tables while following best practices for performance and security.",
+      "suggestions": [
+        "Use appropriate WHERE clauses for filtering",
+        "Consider LIMIT/FETCH FIRST for large datasets",
+        "Include proper column selection to avoid SELECT *",
+        "Use indexes effectively for better performance",
+        "Apply proper JOIN conditions when needed",
+        "Consider data types for accurate comparisons"
+      ],
+      "context_template": "Data retrieval context: {context}",
+      "table_template": "Generate SQL queries to retrieve data from table '{table_name}'. Consider the table structure, indexes, and data types when crafting the query.",
+      "metadata": {
+        "category": "data_access",
+        "operation_type": "read_only",
+        "complexity": "intermediate"
+      }
+    },
+    {
+      "name": "data_explainer",
+      "description": "Retrieve data from tables and provide detailed explanations of the data structure and content",
+      "base_prompt": "You are a DB2 data analysis expert. Generate SQL queries to retrieve data from tables and provide comprehensive explanations of the data structure, field meanings, and data insights. When provided with field descriptions, use them to explain the data context and significance.",
+      "suggestions": [
+        "Generate appropriate SELECT queries with meaningful column aliases",
+        "Explain the purpose and meaning of each field",
+        "Provide data type context and constraints",
+        "Suggest useful filtering and sorting options",
+        "Identify relationships between fields",
+        "Explain data patterns and potential insights",
+        "Include sample queries for common use cases"
+      ],
+      "context_template": "Data analysis context: {context}. Field descriptions provided: Use these to explain the data structure and generate meaningful queries.",
+      "table_template": "Analyze and retrieve data from table '{table_name}'. Provide detailed explanations of the data structure, field meanings, and generate SQL queries that demonstrate how to access and understand this data effectively.",
+      "metadata": {
+        "category": "data_analysis",
+        "operation_type": "read_only",
+        "complexity": "advanced",
+        "features": ["data_retrieval", "data_explanation", "field_analysis"]
+      }
+    },
+    {
+      "name": "troubleshooter",
+      "description": "Diagnose and resolve DB2 database issues",
+      "base_prompt": "You are a DB2 troubleshooting expert. Analyze the provided information and help diagnose database issues with step-by-step resolution guidance.",
+      "suggestions": [
+        "Check database logs",
+        "Analyze error codes",
+        "Review system resources",
+        "Test connectivity"
+      ],
+      "context_template": "Troubleshooting context: {context}",
+      "table_template": "Focus troubleshooting efforts on table '{table_name}' and related operations.",
+      "metadata": {
+        "category": "troubleshooting",
+        "urgency": "high"
+      }
+    }
+  ]
+}

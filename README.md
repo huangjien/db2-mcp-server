@@ -10,6 +10,8 @@ The `db2-mcp-server` is a Python-based server utilizing the MCP framework to int
 ## Features
 - **List Tables**: Retrieve a list of tables from the connected DB2 database.
 - **Get Table Metadata**: Fetch metadata for a specific table, including column details and data types.
+- **Dynamic Prompt Loading**: Load custom prompts from JSON configuration files for flexible query assistance.
+- **Built-in Prompts**: Pre-configured prompts for DB2 query help and schema analysis.
 
 ## Requirements
 - Python 3.12
@@ -40,14 +42,27 @@ The `db2-mcp-server` is a Python-based server utilizing the MCP framework to int
    python src/db2_mcp_server/core.py
    ```
 
+## Dynamic Prompts
+The server supports dynamic prompt loading from JSON configuration files. Set the `PROMPTS_FILE` environment variable to specify a custom prompts configuration file.
+
+### Example Usage
+```bash
+export PROMPTS_FILE=/path/to/your/prompts_config.json
+python src/db2_mcp_server/core.py
+```
+
+### Configuration Format
+See `examples/prompts_config.json` for a complete example and `docs/DYNAMIC_PROMPTS.md` for detailed documentation.
+
 ## Testing
 - Use `pytest` (version ≥ 7.0.0) for running tests.
-- Current test coverage: **97.19%** (exceeding the 80% requirement).
+- Current test coverage: **92.98%** (exceeding the 80% requirement).
 - Comprehensive test suite includes:
   - Core functionality tests (`test_core.py`)
   - Database tools tests (`test_list_tables.py`, `test_metadata_retrieval.py`)
   - Caching mechanism tests (`test_cache.py`)
   - Logging configuration tests (`test_logger.py`)
+  - Dynamic prompt loading tests (`test_dynamic_loader.py`, `test_integration_dynamic_prompts.py`)
 - Run tests with:
   ```bash
   pytest --cov=src/db2_mcp_server --cov-report=html tests/

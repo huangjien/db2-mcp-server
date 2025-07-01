@@ -2,9 +2,11 @@ import logging
 import os
 import sys
 import argparse
+import logging
 
 # Third-party imports
 from dotenv import load_dotenv
+from importlib.metadata import version, PackageNotFoundError
 
 # Local imports
 from .logger import setup_logging
@@ -18,7 +20,9 @@ logger = logging.getLogger(__name__)
 load_dotenv()  # Load .env file
 
 # Import modules after mcp instance is created to avoid circular imports
-
+from .tools import list_tables  # Import existing tools
+from .prompts import db2_prompts  # Import prompts
+from .resources import db2_resources  # Import resources
 
 def main():
   """Entry point for the CLI."""

@@ -1,0 +1,9 @@
+TABLE: sample_table
+id: Unique identifier for the record
+name: Human-readable name or title
+description: Detailed description of the item
+created_at: Timestamp when record was created
+updated_at: Timestamp when record was last modified
+status: Current status (active, inactive, pending)
+user_id: Foreign key reference to users table
+category: Classification or grouping of the item
